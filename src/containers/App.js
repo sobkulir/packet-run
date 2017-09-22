@@ -12,8 +12,15 @@ class App extends Component {
       teams : [
         {
           name : "Strasne dobry tim",
-          packetLoss : 0.41,
+          packetLoss : 41,
           pa : 0,
+          max_pa : 10,
+          score : 0,
+        },
+        {
+          name : "Strasneasf tim",
+          packetLoss : 10,
+          pa : 8,
           max_pa : 10,
           score : 0,
         },

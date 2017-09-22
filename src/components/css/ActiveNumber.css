@@ -1,22 +1,22 @@
-div.ActiveNumber:hover .StepButton {
+div.active-number:hover .step-button {
   visibility: visible;
 }
-.ActiveNumber {
+.active-number {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
 }
 
-.ActiveNumber button {
+.active-number button {
   visibility: hidden;
-  padding : 0px;
+  padding : 3px;
 }
 
-.Value {
+.value {
   padding: 4px 0px;
 }
 
-.Value p {
+.value p {
   padding: 0px 10px;
   margin: 0px;
 }

@@ -1,4 +1,6 @@
 .html5-progress-bar {
+    align-self: center;
+    flex: 1;
     /*padding: 15px 15px;
     border-radius: 3px;
     background-color: #fff;
@@ -7,8 +9,8 @@
 .html5-progress-bar progress {
     background-color: #f3f3f3;
     border: 1px solid #838384;
-    width: 80%;
     height: 18px;
+    width: 100%;
     border-radius:7px;
 }
 
