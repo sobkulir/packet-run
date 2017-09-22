@@ -1,0 +1,22 @@
+div.ActiveNumber:hover .StepButton {
+  visibility: visible;
+}
+.ActiveNumber {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.ActiveNumber button {
+  visibility: hidden;
+  padding : 0px;
+}
+
+.Value {
+  padding: 4px 0px;
+}
+
+.Value p {
+  padding: 0px 10px;
+  margin: 0px;
+}

@@ -1,5 +1,7 @@
 body {
-  margin: 0;
-  padding: 0;
   font-family: sans-serif;
+  max-width: 1080px;
+  margin: 0 auto !important;
+  padding: 0;
+  float: none !important;
 }

@@ -1,0 +1,23 @@
+.html5-progress-bar {
+    /*padding: 15px 15px;
+    border-radius: 3px;
+    background-color: #fff;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, .2);*/
+}
+.html5-progress-bar progress {
+    background-color: #f3f3f3;
+    border: 1px solid #838384;
+    width: 80%;
+    height: 18px;
+    border-radius:7px;
+}
+
+.html5-progress-bar progress::-webkit-progress-value {
+    background: #bfdb7d;
+    border-radius: 7px;
+}
+
+.html5-progress-bar progress::-moz-progress-bar {
+    background: #bfdb7d;
+    border-radius: 7px;
+}

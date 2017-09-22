@@ -1,0 +1,20 @@
+.Dashboard-table {
+  overflow-x:auto;
+}
+
+.Dashboard-table table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.Dashboard-table th, td {
+  border: none;
+  text-align: left;
+  padding: 8px;
+}
+
+.NumberDivider {
+  display: inline-block;
+  vertical-align: middle;
+}
