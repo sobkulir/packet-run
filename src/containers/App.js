@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dashboard from './Dashboard.js';
+import Results from './Results.js'
 
 import './css/App.css';
 
@@ -92,12 +93,17 @@ class App extends Component {
     });
   }
 
+  getRootWidth() {
+    return document.getElementById('root').offsetWidth;
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="App" id="AppContainer">
         <div className="App-header">
           <h1>Packet run</h1>
         </div>
+        <Results display={ this.state.showResults } teams={ this.state.teams } chartWidth={ this.getRootWidth() - 200 } />
         <Dashboard teams={ this.state.teams } addTeam={ this.addTeam } changeStat={ this.changeStat } />
       </div>
     );
