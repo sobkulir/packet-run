@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Dashboard from './Dashboard.js';
-import Results from './Results.js'
+import TeamTable from './TeamTable.js';
+import Dashboard from './Dashboard.js'
 
 import './css/App.css';
 
@@ -8,8 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      paused : false,
-      showResults : true,
+      paused : true,
       teams : [],
     }
 
@@ -17,6 +16,7 @@ class App extends Component {
 
     this.addTeam = this.addTeam.bind(this);
     this.changeStat = this.changeStat.bind(this);
+    this.handlePausedChange = this.handlePausedChange.bind(this);
   }
 
   addTeam(teamName) {
@@ -93,18 +93,26 @@ class App extends Component {
     });
   }
 
-  getRootWidth() {
-    return document.getElementById('root').offsetWidth;
+  handlePausedChange() {
+    this.setState({
+      paused : !this.state.paused
+    })
   }
 
   render() {
     return (
-      <div className="App" id="AppContainer">
-        <div className="App-header">
+      <div className="app">
+        <div className="app-header">
           <h1>Packet run</h1>
         </div>
-        <Results display={ this.state.showResults } teams={ this.state.teams } chartWidth={ this.getRootWidth() - 200 } />
-        <Dashboard teams={ this.state.teams } addTeam={ this.addTeam } changeStat={ this.changeStat } />
+        <Dashboard
+          teams={ this.state.teams }
+          paused={ this.state.paused }
+          handlePausedChange={ this.handlePausedChange }
+          width={ this.props.width }
+        />
+        <hr />
+        <TeamTable teams={ this.state.teams } addTeam={ this.addTeam } changeStat={ this.changeStat } />
       </div>
     );
   }

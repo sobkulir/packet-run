@@ -1,46 +1,21 @@
-.dashboard-table {
-  overflow-x:auto;
-}
-
-.dashboard-table table {
-  border-collapse: collapse;
-  border-spacing: 0;
+.dashboard {
+  margin-bottom: 15px;
   width: 100%;
-}
-
-.dashboard-table th, td {
-  border: none;
-  text-align: left;
-}
-
-.dashboard-table th {
-  padding: 8px;
-}
-
-.dashboard-table td {
-  padding: 0px 8px;
-}
-
-.dashboard-table tr.hoverable:hover {
-  background-color: #f7f7f7;
-}
-
-.vertically-centered {
-  display: inline-block;
-  vertical-align: middle;
-  align-self: center;
-}
-
-.packet-loss-container {
   display: inline-flex;
-  flex-direction: row;
-  width: 100%;
 }
 
-.centered {
-  text-align: center;
+.options {
+  flex: 1;
 }
 
-.add-team {
-  padding-top: 10px;
+.option-single {
+  padding: 10px;
+}
+
+.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
 }

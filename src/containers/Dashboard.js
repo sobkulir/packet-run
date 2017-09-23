@@ -1,84 +1,91 @@
 import React, { Component } from 'react';
-import ProgressBar from '../components/ProgressBar'
-import ActiveNumber from '../components/ActiveNumber'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 import './css/Dashboard.css'
 
+class Results extends Component {
+
+  getChartData() {
+    return  this.props.teams.map((team) => {
+      return {
+        name : team.name,
+        score : team.score,
+      }
+    })
+  }
+
+  render () {
+    return (
+      <div className="results">
+        <BarChart height={300} width={ this.props.width } data={ this.getChartData() }
+              margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+         <XAxis dataKey="name"/>
+         <YAxis/>
+         <CartesianGrid strokeDasharray="3 3"/>
+         <Tooltip/>
+         <Bar dataKey="score" fill="#8884d8" />
+        </BarChart>
+      </div>
+    );
+  }
+}
+
+class Options extends Component {
+
+  render() {
+    return (
+      <div className="options">
+        <div className="option-single">
+          <button className="button-white" onClick={ this.props.handlePausedChange } >
+            { (this.props.paused) ? "Run" : "Pause" }
+          </button>
+        </div>
+
+        <div className="option-single">
+          <button className="button-white" onClick={ this.props.handleShowResultsChange } >
+            { (this.props.showResults) ? "Hide results" : "Show results" }
+          </button>
+        </div>
+      </div>
+    )
+  }
+}
+
 class Dashboard extends Component {
+
   constructor(props) {
-    super(props);
-    this.handleAddTeam = this.handleAddTeam.bind(this);
-  }
+    super(props)
 
-  handleAddTeam() {
-    var teamName = prompt("Enter the name of a new team");
-    if (teamName !== null && teamName !== "") {
-      this.props.addTeam(teamName);
+    this.state = {
+      showResults : true
     }
+
+    this.resultsWidth = Math.floor(0.8 * this.props.width);
+
+    this.handleShowResultsChange = this.handleShowResultsChange.bind(this)
   }
 
-  getTableRows() {
-
-    return this.props.teams.map((team, i) => {
-      return (
-        <tr className="hoverable" key={ i }>
-          <td>{ team.name }</td>
-          <td>
-            <div className="packet-loss-container">
-              <div className="vertically-centered">&#8599;</div>
-              <ActiveNumber
-                value={ Number(team.packetLossGrow).toFixed(1) }
-                textAfter="% / 1 min."
-                step={ 0.5 }
-                handleChange={ this.props.changeStat.bind(null, i, "packetLossGrow") }
-              />
-              <ProgressBar value={ team.packetLoss } maxValue={ 100 } />
-              <ActiveNumber
-                value={ Number(team.packetLoss).toFixed(1) }
-                step={ 5 }
-                textAfter="%"
-                handleChange={ this.props.changeStat.bind(null, i, "packetLoss") }
-              />
-            </div>
-          </td>
-          <td className="centered">
-              <ActiveNumber value={ team.pa } step={ 1 } handleChange={ this.props.changeStat.bind(null, i, "pa") } />
-              <div className="vertically-centered">/</div>
-              <ActiveNumber value={ team.maxPa } step={ 1 } handleChange={ this.props.changeStat.bind(null, i, "maxPa") } />
-          </td>
-        </tr>
-      )
-    });
+  handleShowResultsChange() {
+    this.setState({
+      showResults : !this.state.showResults
+    })
   }
 
   render() {
     return (
-      <div className="dashboard-table">
-        <table>
-          <colgroup>
-            <col span="1" style={{ width: "25%" }} />
-            <col span="1" style={{ width: "60%" }} />
-            <col span="1" style={{ width: "15%" }} />
-          </colgroup>
+      <div className="dashboard">
+        <Options
+          paused={ this.props.paused }
+          handlePausedChange={ this.props.handlePausedChange }
+          showResults={ this.state.showResults }
+          handleShowResultsChange={ this.handleShowResultsChange }
+        />
 
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th>Packet loss</th>
-              <th style={{ textAlign : "center"}}>PA / max_PA</th>
-            </tr>
-            {this.getTableRows()}
-            <tr>
-              <td colSpan={3}>
-                <div className="add-team">
-                  <button className="button-white" onClick={ this.handleAddTeam }>+ Add team</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div className={ (this.state.showResults) ? "visible" : "hidden" }>
+          <Results teams={ this.props.teams } width={ this.resultsWidth } />
+        </div>
       </div>
-    );
+    )
   }
 }
 
