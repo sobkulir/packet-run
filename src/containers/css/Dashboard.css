@@ -11,7 +11,14 @@
 .dashboard-table th, td {
   border: none;
   text-align: left;
+}
+
+.dashboard-table th {
   padding: 8px;
+}
+
+.dashboard-table td {
+  padding: 0px 8px;
 }
 
 .dashboard-table tr.hoverable:hover {
@@ -32,4 +39,8 @@
 
 .centered {
   text-align: center;
+}
+
+.add-team {
+  padding-top: 10px;
 }

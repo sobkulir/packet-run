@@ -9,11 +9,11 @@ div.active-number:hover .step-button {
 
 .active-number button {
   visibility: hidden;
-  padding : 3px;
+  padding : 1px;
 }
 
 .value {
-  padding: 4px 0px;
+  padding: 2px 0px;
 }
 
 .value p {

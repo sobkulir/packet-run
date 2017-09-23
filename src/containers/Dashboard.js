@@ -5,11 +5,22 @@ import ActiveNumber from '../components/ActiveNumber'
 import './css/Dashboard.css'
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.handleAddTeam = this.handleAddTeam.bind(this);
+  }
+
+  handleAddTeam() {
+    var teamName = prompt("Enter the name of a new team");
+    if (teamName !== null && teamName !== "") {
+      this.props.addTeam(teamName);
+    }
+  }
 
   getTableRows() {
     return this.props.teams.map((team, i) => {
       return (
-        <tr className="hoverable">
+        <tr className="hoverable" key={i}>
           <td>{ team.name }</td>
           <td>
             <div className="packet-loss-container">
@@ -30,8 +41,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    const team = this.props.teams[0];
-
     return (
       <div className="dashboard-table">
         <table>
@@ -50,7 +59,9 @@ class Dashboard extends Component {
             {this.getTableRows()}
             <tr>
               <td colSpan={3}>
-                  <button className="button-white">+ Add team</button>
+                <div className="add-team">
+                  <button className="button-white" onClick={ this.handleAddTeam }>+ Add team</button>
+                </div>
               </td>
             </tr>
           </tbody>
