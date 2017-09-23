@@ -22,7 +22,6 @@ class Results extends Component {
        <YAxis/>
        <CartesianGrid strokeDasharray="3 3"/>
        <Tooltip/>
-       <Legend />
        <Bar dataKey="score" fill="#8884d8" />
       </BarChart>
     );
