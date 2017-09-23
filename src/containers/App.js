@@ -17,6 +17,7 @@ class App extends Component {
     this.addTeam = this.addTeam.bind(this);
     this.changeStat = this.changeStat.bind(this);
     this.handlePausedChange = this.handlePausedChange.bind(this);
+    this.handleRestore = this.handleRestore.bind(this);
   }
 
   addTeam(teamName) {
@@ -56,6 +57,8 @@ class App extends Component {
       )
       return { teams : newTeams };
     });
+
+    localStorage.setItem("packetRunSaveTeams", JSON.stringify(this.state.teams));
   }
 
   changeStat(teamIndex, statName, diff, eventObject) {
@@ -99,6 +102,17 @@ class App extends Component {
     })
   }
 
+  handleRestore() {
+    var newTeamsJSON = localStorage.getItem("packetRunSaveTeams")
+    if (newTeamsJSON === null) {
+      return
+    }
+
+    this.setState({
+      teams : JSON.parse(newTeamsJSON),
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -109,6 +123,7 @@ class App extends Component {
           teams={ this.state.teams }
           paused={ this.state.paused }
           handlePausedChange={ this.handlePausedChange }
+          handleRestore={ this.handleRestore }
           width={ this.props.width }
         />
         <hr />

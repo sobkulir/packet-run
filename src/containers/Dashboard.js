@@ -46,6 +46,12 @@ class Options extends Component {
             { (this.props.showResults) ? "Hide results" : "Show results" }
           </button>
         </div>
+
+        <div className="option-single">
+          <button className="button-white" onClick={ this.props.handleRestore } >
+            Restore session
+          </button>
+        </div>
       </div>
     )
   }
@@ -63,6 +69,7 @@ class Dashboard extends Component {
     this.resultsWidth = Math.floor(0.8 * this.props.width);
 
     this.handleShowResultsChange = this.handleShowResultsChange.bind(this)
+
   }
 
   handleShowResultsChange() {
@@ -79,6 +86,7 @@ class Dashboard extends Component {
           handlePausedChange={ this.props.handlePausedChange }
           showResults={ this.state.showResults }
           handleShowResultsChange={ this.handleShowResultsChange }
+          handleRestore={ this.props.handleRestore }
         />
 
         <div className={ (this.state.showResults) ? "visible" : "hidden" }>
