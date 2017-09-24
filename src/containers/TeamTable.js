@@ -87,9 +87,7 @@ class Row extends Component {
       var packetLoss = this.props.team.packetLoss;
 
       for (var i = 0; i < diff; ++i) {
-        var rand = Math.random() * 100;
-        console.log(rand + " " + packetLoss)
-        if (rand < packetLoss) {
+        if (Math.random() * 100 < packetLoss) {
           lost++;
         }
       }
