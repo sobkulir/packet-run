@@ -45,3 +45,12 @@
 .add-team {
   padding-top: 10px;
 }
+
+.alert {
+  background: red;
+}
+.alert td {
+  text-align: center;
+  font-size: xx-large;
+  text-transform: uppercase;
+}

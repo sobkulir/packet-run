@@ -4,6 +4,15 @@ import Dashboard from './Dashboard.js'
 
 import './css/App.css';
 
+const defaultPacketLoss = 5
+const defaultPacketLossGrow = 3.0
+const defualtPa = 0
+const defaultMaxPa = 10
+const defaultScore = 0
+
+const packetLossGrowPerPa = 0.1
+//const secondsToDecreaseOnePa = 15
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -24,11 +33,11 @@ class App extends Component {
     this.setState({teams: this.state.teams.concat([
       {
         name : teamName,
-        packetLoss : 4,
-        packetLossGrow : 3.0,
-        pa : 0,
-        maxPa : 10,
-        score : 0,
+        packetLoss : defaultPacketLoss,
+        packetLossGrow : defaultPacketLossGrow,
+        pa : defualtPa,
+        maxPa : defaultMaxPa,
+        score : defaultScore,
       }
     ])});
   }
@@ -69,7 +78,8 @@ class App extends Component {
 
     this.setState((prevState) => {
       var newTeams = prevState.teams.slice();
-      var oldValue = newTeams[teamIndex][statName]
+
+      var oldValue = newTeams[teamIndex][statName];
       var newValue = oldValue + diff;
 
       if (newValue < 0) {
@@ -86,7 +96,7 @@ class App extends Component {
         }
 
         if (newValue > oldValue) {
-          newTeams[teamIndex]["packetLossGrow"] = newTeams[teamIndex]["packetLossGrow"] + (newValue - oldValue) / 10;
+          newTeams[teamIndex]["packetLossGrow"] = newTeams[teamIndex]["packetLossGrow"] + (newValue - oldValue) * packetLossGrowPerPa;
         }
       }
 
@@ -119,6 +129,7 @@ class App extends Component {
         <div className="app-header">
           <h1>Packet run</h1>
         </div>
+
         <Dashboard
           teams={ this.state.teams }
           paused={ this.state.paused }

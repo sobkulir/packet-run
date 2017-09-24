@@ -7,6 +7,7 @@ import './css/TeamTable.css'
 class TeamTable extends Component {
   constructor(props) {
     super(props);
+
     this.handleAddTeam = this.handleAddTeam.bind(this);
   }
 
@@ -18,35 +19,9 @@ class TeamTable extends Component {
   }
 
   getTableRows() {
-
     return this.props.teams.map((team, i) => {
       return (
-        <tr className="hoverable" key={ i }>
-          <td>{ team.name }</td>
-          <td>
-            <div className="packet-loss-container">
-              <div className="vertically-centered">&#8599;</div>
-              <ActiveNumber
-                value={ Number(team.packetLossGrow).toFixed(1) }
-                textAfter="% / 1 min."
-                step={ 0.5 }
-                handleChange={ this.props.changeStat.bind(null, i, "packetLossGrow") }
-              />
-              <ProgressBar value={ team.packetLoss } maxValue={ 100 } />
-              <ActiveNumber
-                value={ Number(team.packetLoss).toFixed(1) }
-                step={ 5 }
-                textAfter="%"
-                handleChange={ this.props.changeStat.bind(null, i, "packetLoss") }
-              />
-            </div>
-          </td>
-          <td className="centered">
-              <ActiveNumber value={ team.pa } step={ 1 } handleChange={ this.props.changeStat.bind(null, i, "pa") } />
-              <div className="vertically-centered">/</div>
-              <ActiveNumber value={ team.maxPa } step={ 1 } handleChange={ this.props.changeStat.bind(null, i, "maxPa") } />
-          </td>
-        </tr>
+        <Row changeStat={ this.props.changeStat.bind(null, i) } team={ team } key={ i } />
       )
     });
   }
@@ -61,13 +36,17 @@ class TeamTable extends Component {
             <col span="1" style={{ width: "15%" }} />
           </colgroup>
 
-          <tbody>
+          <thead>
             <tr>
               <th>Name</th>
               <th>Packet loss</th>
               <th style={{ textAlign : "center"}}>PA / max_PA</th>
             </tr>
+          </thead>
+
+          <tbody>
             {this.getTableRows()}
+
             <tr>
               <td colSpan={3}>
                 <div className="add-team">
@@ -82,4 +61,107 @@ class TeamTable extends Component {
   }
 }
 
+class Row extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentlyLostPackets: 0
+    }
+
+    this.handlePaChange = this.handlePaChange.bind(this);
+  }
+
+  componentWillUpdate() {
+    this.alertHeight = this.InfoRow.clientHeight
+  }
+
+  handlePaChange(diff, EventObject) {
+
+    if (this.props.team.pa === this.props.team.maxPa && diff > 0) {
+      alert("Value pa already reached maxPa.");
+    }
+
+    if (diff > 0) {
+      var lost = 0;
+      var packetLoss = this.props.team.packetLoss;
+
+      for (var i = 0; i < diff; ++i) {
+        var rand = Math.random() * 100;
+        console.log(rand + " " + packetLoss)
+        if (rand < packetLoss) {
+          lost++;
+        }
+      }
+
+      if (lost > 0) {
+        this.setState({
+          currentlyLostPackets : lost
+        });
+        setTimeout(() => {
+          this.setState((prevState) => {
+            return {
+              currentlyLostPackets : prevState.currentlyLostPackets - lost
+            };
+          }
+        )}, 800);
+      }
+
+      diff = diff - lost;
+    }
+
+    if (diff !== 0) {
+      this.props.changeStat("pa", diff, EventObject);
+    }
+  }
+
+  render() {
+    const team = this.props.team
+
+    if (this.state.currentlyLostPackets !== 0 && team.pa < team.maxPa) {
+      return (
+        <tr style={{ height: this.alertHeight }} className="alert" ref={ InfoRow => { this.InfoRow = InfoRow; } }>
+          <td colSpan={ 3 }>
+            Packet lost
+          </td>
+        </tr>
+      )
+    } else {
+      return (
+        <tr className="hoverable" ref={ InfoRow => { this.InfoRow = InfoRow; } } >
+          <td>{ team.name }</td>
+          <td>
+            <div className="packet-loss-container">
+              { /* <div className="vertically-centered">&#8599; { Number(team.packetLossGrow).toFixed(1) }</div> */ }
+              {
+                /*
+                <div className="vertically-centered">&#8599;</div>
+                <ActiveNumber
+                  value={ Number(team.packetLossGrow).toFixed(1) }
+                  textAfter="% / 1 min."
+                  step={ 0.5 }
+                  handleChange={ this.props.changeStat.bind(null, i, "packetLossGrow") }
+                />
+                */
+              }
+              <ProgressBar value={ team.packetLoss } maxValue={ 100 } />
+              <ActiveNumber
+                value={ Number(team.packetLoss).toFixed(1) }
+                step={ 5 }
+                textAfter="%"
+                handleChange={ this.props.changeStat.bind(null, "packetLoss") }
+              />
+            </div>
+          </td>
+          <td className="centered">
+              <ActiveNumber value={ team.pa } step={ 1 } handleChange={ this.handlePaChange } />
+              <div className="vertically-centered">/</div>
+              <ActiveNumber value={ team.maxPa } step={ 1 } handleChange={ this.props.changeStat.bind(null, "maxPa") } />
+          </td>
+        </tr>
+      )
+    }
+  }
+
+}
 export default TeamTable;
