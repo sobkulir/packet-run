@@ -144,7 +144,7 @@ class Row extends Component {
                 />
                 */
               }
-              <ProgressBar value={ team.packetLoss } maxValue={ 100 } />
+              <ProgressBar value={ Math.floor(team.packetLoss) } maxValue={ 100 } />
               <ActiveNumber
                 value={ Number(team.packetLoss).toFixed(1) }
                 step={ 5 }

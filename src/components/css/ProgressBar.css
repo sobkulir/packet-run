@@ -15,11 +15,75 @@
 }
 
 .html5-progress-bar progress::-webkit-progress-value {
-    background: #bfdb7d;
     border-radius: 7px;
 }
 
 .html5-progress-bar progress::-moz-progress-bar {
-    background: #bfdb7d;
     border-radius: 7px;
+}
+
+
+.html5-progress-bar progress[value^="0"]::-webkit-progress-value,
+.html5-progress-bar progress[value^="1"]::-webkit-progress-value{
+   background-color: #bfdb7d;;
+}
+
+
+.html5-progress-bar progress[value^="0"]::-moz-progress-bar,
+.html5-progress-bar progress[value^="1"]::-moz-progress-bar{
+    background-color: #bfdb7d;
+}
+
+.html5-progress-bar progress[value^="2"]::-webkit-progress-value,
+.html5-progress-bar progress[value^="3"]::-webkit-progress-value,
+.html5-progress-bar progress[value^="4"]::-webkit-progress-value{
+     background-color: #f7a867;
+}
+
+.html5-progress-bar progress[value^="2"]::-moz-progress-bar,
+.html5-progress-bar progress[value^="3"]::-moz-progress-bar,
+.html5-progress-bar progress[value^="4"]::-moz-progress-bar{
+     background-color: #f7a867;
+}
+
+.html5-progress-bar progress[value^="5"]::-moz-progress-bar,
+.html5-progress-bar progress[value^="6"]::-moz-progress-bar,
+.html5-progress-bar progress[value^="7"]::-moz-progress-bar,
+.html5-progress-bar progress[value^="8"]::-moz-progress-bar,
+.html5-progress-bar progress[value^="9"]::-moz-progress-bar,
+.html5-progress-bar progress[value="100"]::-moz-progress-bar{
+    background-color: #f76767;
+}
+
+.html5-progress-bar progress[value^="5"]::-webkit-progress-value,
+.html5-progress-bar progress[value^="6"]::-webkit-progress-value,
+.html5-progress-bar progress[value^="7"]::-webkit-progress-value,
+.html5-progress-bar progress[value^="8"]::-webkit-progress-value,
+.html5-progress-bar progress[value^="9"]::-webkit-progress-value,
+.html5-progress-bar progress[value="100"]::-webkit-progress-value{
+    background-color: #f76767;
+}
+
+.html5-progress-bar progress[value="1"]::-webkit-progress-value,
+.html5-progress-bar progress[value="2"]::-webkit-progress-value,
+.html5-progress-bar progress[value="3"]::-webkit-progress-value,
+.html5-progress-bar progress[value="4"]::-webkit-progress-value,
+.html5-progress-bar progress[value="5"]::-webkit-progress-value,
+.html5-progress-bar progress[value="6"]::-webkit-progress-value,
+.html5-progress-bar progress[value="7"]::-webkit-progress-value,
+.html5-progress-bar progress[value="8"]::-webkit-progress-value,
+.html5-progress-bar progress[value="9"]::-webkit-progress-value{
+   background-color: #bfdb7d;
+}
+
+.html5-progress-bar progress[value="1"]::-moz-progress-bar,
+.html5-progress-bar progress[value="2"]::-moz-progress-bar,
+.html5-progress-bar progress[value="3"]::-moz-progress-bar,
+.html5-progress-bar progress[value="4"]::-moz-progress-bar,
+.html5-progress-bar progress[value="5"]::-moz-progress-bar,
+.html5-progress-bar progress[value="6"]::-moz-progress-bar,
+.html5-progress-bar progress[value="7"]::-moz-progress-bar,
+.html5-progress-bar progress[value="8"]::-moz-progress-bar,
+.html5-progress-bar progress[value="9"]::-moz-progress-bar{
+   background-color: #bfdb7d;
 }
