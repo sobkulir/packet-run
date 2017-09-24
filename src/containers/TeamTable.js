@@ -38,7 +38,7 @@ class TeamTable extends Component {
 
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Team name</th>
               <th>Packet loss</th>
               <th style={{ textAlign : "center"}}>PA / max_PA</th>
             </tr>
@@ -66,7 +66,7 @@ class Row extends Component {
     super(props);
 
     this.state = {
-      currentlyLostPackets: 0
+      isPacketLost: false
     }
 
     this.handlePaChange = this.handlePaChange.bind(this);
@@ -96,15 +96,16 @@ class Row extends Component {
 
       if (lost > 0) {
         this.setState({
-          currentlyLostPackets : lost
+          isPacketLost : true
         });
         setTimeout(() => {
           this.setState((prevState) => {
             return {
-              currentlyLostPackets : prevState.currentlyLostPackets - lost
+              isPacketLost : !prevState.isPacketLost
             };
           }
         )}, 800);
+        this.props.changeStat("lostPa", lost, EventObject)
       }
 
       diff = diff - lost;
@@ -118,7 +119,7 @@ class Row extends Component {
   render() {
     const team = this.props.team
 
-    if (this.state.currentlyLostPackets !== 0 && team.pa < team.maxPa) {
+    if (this.state.isPacketLost && team.pa < team.maxPa) {
       return (
         <tr style={{ height: this.alertHeight }} className="alert" ref={ InfoRow => { this.InfoRow = InfoRow; } }>
           <td colSpan={ 3 }>
@@ -144,6 +145,9 @@ class Row extends Component {
                 />
                 */
               }
+              <div className="vertically-centered">
+                <p className="lost-pa">[{ team.lostPa }]</p>
+              </div>
               <ProgressBar value={ Math.floor(team.packetLoss) } maxValue={ 100 } />
               <ActiveNumber
                 value={ Number(team.packetLoss).toFixed(1) }
@@ -154,7 +158,11 @@ class Row extends Component {
             </div>
           </td>
           <td className="centered">
-              <ActiveNumber value={ team.pa } step={ 1 } handleChange={ this.handlePaChange } />
+              <ActiveNumber
+                value={ team.pa }
+                step={ 1 }
+                handleChange={ this.handlePaChange }
+              />
               <div className="vertically-centered">/</div>
               <ActiveNumber value={ team.maxPa } step={ 1 } handleChange={ this.props.changeStat.bind(null, "maxPa") } />
           </td>

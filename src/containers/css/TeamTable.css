@@ -54,3 +54,10 @@
   font-size: xx-large;
   text-transform: uppercase;
 }
+
+.lost-pa {
+  padding-right: 15px;
+  width: 30px;
+  text-align: right;
+  overflow: hidden;
+}

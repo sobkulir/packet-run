@@ -7,6 +7,7 @@ import './css/App.css';
 const defaultPacketLoss = 5
 const defaultPacketLossGrow = 3.0
 const defualtPa = 0
+const defaultLostPa = 0
 const defaultMaxPa = 10
 const defaultScore = 0
 
@@ -36,6 +37,7 @@ class App extends Component {
         packetLoss : defaultPacketLoss,
         packetLossGrow : defaultPacketLossGrow,
         pa : defualtPa,
+        lostPa : defaultLostPa,
         maxPa : defaultMaxPa,
         score : defaultScore,
       }
@@ -72,10 +74,6 @@ class App extends Component {
 
   changeStat(teamIndex, statName, diff, eventObject) {
 
-    if (statName === "maxPa" && diff < 0) {
-      return;
-    }
-
     this.setState((prevState) => {
       var newTeams = prevState.teams.slice();
 
@@ -84,6 +82,10 @@ class App extends Component {
 
       if (newValue < 0) {
         newValue = 0;
+      }
+
+      if (statName === "maxPa" && newValue < newTeams[teamIndex]["pa"]) {
+        return;
       }
 
       if (statName === "packetLoss" && newValue > 100) {
