@@ -2,7 +2,7 @@ body {
   font-family: sans-serif;
   max-width: 1080px;
   margin: 0 auto !important;
-  padding: 0;
+  padding: 0 0 50px 0;
   float: none !important;
 }
 

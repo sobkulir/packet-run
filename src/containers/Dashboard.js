@@ -8,7 +8,7 @@ class Results extends Component {
   getChartData() {
     return  this.props.teams.map((team) => {
       return {
-        name : team.name,
+        name : team.name.substr(0, 15),
         score : team.score,
       }
     })
