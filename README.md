@@ -1,10 +1,14 @@
 # Packet run
-Browserová aplikácia pre táborovú hru.
+Single-page app for a camp game encouraging children to run. Players physically
+(by running) transmit packets from server to clients. A successfully transmitted
+packet can be submitted to the app which updates the total score. The app also
+accounts for *packet loss* and has a minimalistic, interactive interface
+to motivate the children.
 
-## Inštalácia
-Prerekvizita je **Node** a **npm**.
+## Installation
+Prerequisites are **Node** and **npm**.
 
-Takto sa spúšťa *dev* verzia na http://localhost:3000
+Starting the *dev* version at http://localhost:3000
 
 ```
 git clone https://github.com/romeritto/packet-run
@@ -12,3 +16,8 @@ cd packet-run
 npm install
 npm start
 ```
+
+# Game rules
+Pravidlá nájdete v `Pravidla-SK.md`
+
+Currently the rules are only available in Slovak. If you are interested write me an email at r.sobkuliak(at)gmail.com
