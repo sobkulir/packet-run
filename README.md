@@ -18,6 +18,6 @@ npm start
 ```
 
 # Game rules
-Pravidlá nájdete v `Pravidla-SK.md`
+Pravidlá nájdete v `Pravidla-SK.pdf`
 
 Currently the rules are only available in Slovak. If you are interested write me an email at r.sobkuliak(at)gmail.com
